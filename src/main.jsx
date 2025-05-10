@@ -5,7 +5,6 @@ import App from './App.jsx'
 import { ClerkProvider } from "@clerk/clerk-react";
 import { shadesOfPurple } from '@clerk/themes'
 import { esMX } from '@clerk/localizations'
-import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
 
@@ -19,12 +18,12 @@ createRoot(document.getElementById('root')).render(
 			}}
 			publishableKey={clerkPubKey}
 			localization={esMX}
+			signUpFallbackRedirectUrl="/dashboard"
+      		signInFallbackRedirectUrl="/dashboard"
 		>
-			<BrowserRouter>
-				<ThemeProvider theme={theme}>
-					<App />
-				</ThemeProvider>
-			</BrowserRouter>
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
 		</ClerkProvider>
 	</StrictMode>,
 )

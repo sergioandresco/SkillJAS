@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useUser } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import Header from "../../components/header";
 import HeroSection from "../../components/hero";
@@ -6,6 +9,16 @@ import HowItWorksSection from "../../components/howItWorks";
 import FinalCTASection from "../../components/finalCtaSection";
 
 function HomePage() {
+
+    // const { isSignedIn } = useUser();
+	// const navigate = useNavigate();
+
+	// useEffect(() => {
+	// 	if (isSignedIn) {
+	// 		navigate("/dashboard");
+	// 	}
+	// }, [isSignedIn, navigate]);
+
     return (
         <>
             <Header />

@@ -40,3 +40,7 @@ html, body, #root{
     color: #a78bfa;
     text-decoration: underline;
 }
+
+.cl-userButtonPopoverCard{
+    font-family: 'Quicksand', sans-serif;
+}
