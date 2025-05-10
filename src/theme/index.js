@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
 	typography: {
-		fontFamily: `'Dosis', sans-serif`,
+		fontFamily: `'Quicksand', sans-serif`,
 		h1: {
 			fontFamily: `'Quicksand', sans-serif`,
 		},

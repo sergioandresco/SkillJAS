@@ -1,12 +1,17 @@
 .tilted-card-figure {
     position: relative;
-    width: 100%;
-    height: 100%;
-    perspective: 800px;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
   
 .tilted-card-mobile-alert {
@@ -35,7 +40,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 15px;
     will-change: transform;
     transform: translateZ(0);
@@ -68,11 +73,12 @@
     text-transform: capitalize;
     color: #fff;
     letter-spacing: -.5px;
-    background: #0006;
+    background: #7c3aeded;
     border-radius: 15px;
-    margin: 2em;
+    margin: 0em;
     padding: .5rem 1em;
-    font-family: DM Sans;
+    font-family: 'Quicksand', sans-serif;
     font-weight: 900;
     box-shadow: 0 5px 30px #06060659;
+    font-size: 14px;
 } 

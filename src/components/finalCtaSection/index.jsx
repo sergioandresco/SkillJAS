@@ -4,15 +4,16 @@ import TiltedCard from "../tiltedCard";
 
 const technologies = [
     { name: "React", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "Node.js", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "Python", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "Figma", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "JavaScript", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "TypeScript", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "Docker", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "AWS", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "MongoDB", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
-    { name: "MySQL", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg" },
+    { name: ".NET", logo: "https://microsistem.s3.us-east-2.amazonaws.com/dot-net.svg" },
+    { name: "Node.js", logo: "https://microsistem.s3.us-east-2.amazonaws.com/nodejs.svg" },
+    { name: "Python", logo: "https://microsistem.s3.us-east-2.amazonaws.com/python.svg" },
+    { name: "Figma", logo: "https://microsistem.s3.us-east-2.amazonaws.com/figma.svg" },
+    { name: "JavaScript", logo: "https://microsistem.s3.us-east-2.amazonaws.com/javascript.svg" },
+    { name: "TypeScript", logo: "https://microsistem.s3.us-east-2.amazonaws.com/typescript.svg" },
+    { name: "Docker", logo: "https://microsistem.s3.us-east-2.amazonaws.com/docker.svg" },
+    { name: "AWS", logo: "https://microsistem.s3.us-east-2.amazonaws.com/aws.svg" },
+    { name: "MongoDB", logo: "https://microsistem.s3.us-east-2.amazonaws.com/mongodb.svg" },
+    { name: "MySQL", logo: "https://microsistem.s3.us-east-2.amazonaws.com/mysql.svg" },
 ];
 
 function FinalCTASection() {
@@ -50,10 +51,10 @@ function FinalCTASection() {
                                     imageSrc={tech.logo}
                                     altText={tech.name}
                                     captionText={tech.name}
-                                    containerHeight="200px"
-                                    containerWidth="200px"
-                                    imageHeight="200px"
-                                    imageWidth="200px"
+                                    containerHeight="150px"
+                                    containerWidth="150px"
+                                    imageHeight="150px"
+                                    imageWidth="150px"
                                     rotateAmplitude={12}
                                     scaleOnHover={1.2}
                                     showMobileWarning={false}
