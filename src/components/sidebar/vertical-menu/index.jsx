@@ -60,7 +60,7 @@ function VerticalMenu({ open }){
                         className='opt-vertical-menu' 
                         button
                         component={Link} 
-                        to="/dashboard/categories"
+                        to="/dashboard/courses"
                     >
                         <ListItemIcon sx={{ minWidth: 40 }}>
                             <IoHome color='#F0F0F0' style={{ fontSize: 22 }} />

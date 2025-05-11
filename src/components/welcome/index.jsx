@@ -47,7 +47,7 @@ function Welcome() {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => navigate("/dashboard/categories")}
+                        onClick={() => navigate("/dashboard/courses")}
                         sx={{ 
                             px: 3, 
                             py: 1.5,

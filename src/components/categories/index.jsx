@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import TiltedCard from "../tiltedCard";
 import { useAuth } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
     { name: "React", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg", url: "/dashboard/course/react" },
@@ -20,9 +21,20 @@ const categories = [
 function Categories() {
 
     const { getToken } = useAuth();
-    const token = getToken();
+    const navigate = useNavigate();
 
-    console.log("Token:", token);
+    const handleCategoryClick = async (categorie) => {
+        const token = await getToken();
+        if (!token) return;
+      
+        navigate(`/dashboard/course/${categorie.name.toLowerCase()}`, {
+          state: {                         
+            token,
+            logo: categorie.logo,
+            title: categorie.name
+          }
+        });
+    };
 
     return ( 
         <Box
@@ -46,6 +58,8 @@ function Categories() {
                             <motion.div
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ type: "spring", stiffness: 300 }}
+                                onClick={() => handleCategoryClick(categorie)}
+                                style={{ cursor: "pointer" }}
                             >
                                 <TiltedCard
                                     imageSrc={categorie.logo}

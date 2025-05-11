@@ -9,6 +9,7 @@ import { MenuProvider } from './context/MenuContext';
 import Categories from "./components/categories";
 import Welcome from "./components/welcome";
 import AddVideo from "./components/addVideo";
+import CourseByCategory from "./pages/courseByCategory";
 
 const router = createBrowserRouter([
 	{
@@ -48,8 +49,12 @@ const router = createBrowserRouter([
 			element: <Welcome />
 		},
 		{
-			path: "categories",
+			path: "courses",
 			element: <Categories />
+		},
+		{
+			path: "course/:category",
+			element: <CourseByCategory />
 		},
 		{
 			path: "add-video",
