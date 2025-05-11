@@ -1,6 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import TiltedCard from "../tiltedCard";
+import { useAuth } from "@clerk/clerk-react";
 
 const categories = [
     { name: "React", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg", url: "/dashboard/course/react" },
@@ -17,6 +18,12 @@ const categories = [
 ];
 
 function Categories() {
+
+    const { getToken } = useAuth();
+    const token = getToken();
+
+    console.log("Token:", token);
+
     return ( 
         <Box
             sx={{
@@ -24,6 +31,7 @@ function Categories() {
                 px: 2,
                 color: "#fff",
                 textAlign: "center",
+                marginBottom: "45px",
             }}
         >
             <motion.div

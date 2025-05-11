@@ -7,8 +7,11 @@ import { shadesOfPurple } from '@clerk/themes'
 import { esMX } from '@clerk/localizations'
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')).render(
 	<StrictMode>
@@ -22,7 +25,9 @@ createRoot(document.getElementById('root')).render(
       		signInFallbackRedirectUrl="/dashboard"
 		>
 			<ThemeProvider theme={theme}>
-				<App />
+				<QueryClientProvider client={queryClient}>
+					<App />
+				</QueryClientProvider>
 			</ThemeProvider>
 		</ClerkProvider>
 	</StrictMode>,

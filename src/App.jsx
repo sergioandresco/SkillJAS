@@ -7,6 +7,8 @@ import Unauthorized from "./views/unauthorized";
 import ProtectedRoute from "./protectedRoute";
 import { MenuProvider } from './context/MenuContext';
 import Categories from "./components/categories";
+import Welcome from "./components/welcome";
+import AddVideo from "./components/addVideo";
 
 const router = createBrowserRouter([
 	{
@@ -42,8 +44,16 @@ const router = createBrowserRouter([
 	  ),
 	  children: [
 		{
-		  path: "categories",
-		  element: <Categories />
+			index: true,
+			element: <Welcome />
+		},
+		{
+			path: "categories",
+			element: <Categories />
+		},
+		{
+			path: "add-video",
+			element: <AddVideo />
 		},
 	  ]
 	},
