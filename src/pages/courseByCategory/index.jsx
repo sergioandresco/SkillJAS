@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { useCategoryVideos } from "../../hooks/useCategoryVideos";
@@ -28,6 +28,8 @@ function CourseByCategory() {
     const { getToken } = useAuth();
     const [token, setToken] = useState(null);
     const [page, setPage] = useState(1);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getToken().then(setToken);
@@ -121,10 +123,10 @@ function CourseByCategory() {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        href={video.courseUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         fullWidth
+                                        onClick={() => navigate(`/dashboard/course/video/${video.id}`)}
                                         sx={{
                                             background: '#7c3aed',
                                             "&:hover": {

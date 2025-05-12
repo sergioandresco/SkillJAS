@@ -27,7 +27,7 @@ function Categories() {
         const token = await getToken();
         if (!token) return;
       
-        navigate(`/dashboard/course/${categorie.name.toLowerCase()}`, {
+        navigate(`/dashboard/course/category/${categorie.name.toLowerCase()}`, {
           state: {                         
             token,
             logo: categorie.logo,

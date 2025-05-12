@@ -1,0 +1,112 @@
+import { useParams } from 'react-router-dom';
+import { useAuth } from '@clerk/clerk-react';
+import { useEffect, useState } from 'react';
+import { useVideoDetail } from '../../hooks/useVideoDetail';
+import {
+    Box,
+    Typography,
+    CircularProgress,
+    Chip,
+    Stack,
+    Button,
+    Container
+} from '@mui/material';
+
+const getYouTubeId = (url) => {
+  const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/);
+  return match ? match[1] : null;
+};
+
+function VideoDetail() {
+    const { id } = useParams();
+    const { getToken } = useAuth();
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        getToken().then(setToken);
+    }, [getToken]);
+
+    const { data: video, isLoading, error } = useVideoDetail(id, token);
+
+    if (isLoading || !token) return <CircularProgress />;
+    if (error) return <Typography>Error loading video</Typography>;
+
+    const videoId = getYouTubeId(video.courseUrl);
+
+    return (
+        <Container maxWidth="md" sx={{ py: 4, marginBottom: '32px' }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    paddingTop: '56.25%', // 16:9
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    mb: 4,
+                }}
+            >
+                <iframe
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title={video.title}
+                    frameBorder="0"
+                    allowFullScreen
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                    }}
+                />
+            </Box>
+
+            <Typography variant="h4" fontWeight="bold" gutterBottom sx={{ color: 'white' }}>
+                {video.title}
+            </Typography>
+
+            <Typography variant="body1" mb={3} sx={{ color: 'white' }}>
+                {video.description}
+            </Typography>
+
+            {video.categories?.length > 0 && (
+                <Stack direction="row" spacing={1} mb={3} flexWrap="wrap">
+                    {video.categories.map((cat, i) => (
+                        <Chip key={i} label={cat} color="primary" />
+                    ))}
+                </Stack>
+            )}
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    href={video.courseUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ 
+                        background: '#7c3aed',
+                        "&:hover": {
+                            backgroundColor: "#a78bfa",
+                            color: "#ffffff",
+                        },
+                    }}
+                >
+                    Ver en YouTube
+                </Button>
+                <Button 
+                    variant="contained"
+                    sx={{ 
+                        background: '#7c3aed',
+                        "&:hover": {
+                            backgroundColor: "#a78bfa",
+                            color: "#ffffff",
+                        },
+                    }}
+                >
+                    Agregar a favoritos
+                </Button>
+            </Stack>
+        </Container>
+    );
+}
+
+export default VideoDetail;

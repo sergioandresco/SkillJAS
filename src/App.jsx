@@ -10,6 +10,8 @@ import Categories from "./components/categories";
 import Welcome from "./components/welcome";
 import AddVideo from "./components/addVideo";
 import CourseByCategory from "./pages/courseByCategory";
+import VideoDetail from "./pages/videoDetail";
+import AdminVideos from "./components/adminVideos";
 
 const router = createBrowserRouter([
 	{
@@ -53,12 +55,20 @@ const router = createBrowserRouter([
 			element: <Categories />
 		},
 		{
-			path: "course/:category",
+			path: "course/category/:category",
 			element: <CourseByCategory />
+		},
+		{
+			path: "course/video/:id",
+			element: <VideoDetail />
 		},
 		{
 			path: "add-video",
 			element: <AddVideo />
+		},
+		{
+			path: "admin-videos",
+			element: <AdminVideos />
 		},
 	  ]
 	},
