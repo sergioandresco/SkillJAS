@@ -45,7 +45,7 @@ function CourseByCategory() {
     };
 
     return (
-        <Box sx={{ p: 4 }}>
+        <Box sx={{ p: {xs: 0, md: 4} }}>
             <Box 
                 sx={{ 
                     display:"flex", 
@@ -80,7 +80,9 @@ function CourseByCategory() {
                 </Typography>
             </Box>
             <Grid container spacing={4}>
-                {data.items.map((video) => {
+                {data.items
+                    .filter((video) => video.isActive)
+                    .map((video) => {
                     const videoId = getYouTubeId(video.courseUrl);
                     const thumbnail = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     return (

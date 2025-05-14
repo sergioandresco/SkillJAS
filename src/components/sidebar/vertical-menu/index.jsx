@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box } from '@mui/material';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, useMediaQuery, useTheme } from '@mui/material';
 import { IoHome } from "react-icons/io5";
 import { MdAddToQueue, MdOutlineVideoSettings } from "react-icons/md";
 import GradientText from '../../gradientText';
+import { useMenu } from '../../../context/MenuContext';
 
 import './vertical-menu.css'
 
@@ -12,20 +13,28 @@ function VerticalMenu({ open }){
     const { user } = useUser();
     const role = user?.publicMetadata?.role || "user";
 
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const { toggleMenu } = useMenu();
+
     return (
         <Drawer
             className='vertical-header'
             classes={{ paper: 'vertical-header' }}
-            variant="persistent"
+            variant={isMobile ? 'temporary' : 'persistent'}
             anchor="left"
             open={open}
+            onClose={toggleMenu}
+            ModalProps={{
+                keepMounted: true,
+            }}
             sx={{
-                width: 240,
+                width: isMobile ? 240 : 240,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                    width: 240,
+                    width: isMobile ? 240 : 240,
                     boxSizing: 'border-box',
-                    background: 'linear-gradient(135deg, #2C2C4A, #3A3A6A)'
+                    background: 'linear-gradient(135deg, #2C2C4A, #3A3A6A)',
                 },
             }}
         >

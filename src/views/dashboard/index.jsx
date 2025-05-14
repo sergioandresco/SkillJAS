@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { useUser } from "@clerk/clerk-react";
 import { motion } from 'framer-motion';
 import { Outlet } from 'react-router-dom';
@@ -11,6 +11,9 @@ function Dashboard() {
 	const { open, toggleMenu } = useMenu();
 	const { user } = useUser();
 	const role = user?.publicMetadata?.role || "user";
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return ( 
 		<Box sx={{ position: 'relative', height: '100vh', width: '100%', overflow: 'hidden' }}>
@@ -26,13 +29,13 @@ function Dashboard() {
             
             <motion.div
                 initial={{ marginLeft: '0' }}
-                animate={{ marginLeft: open ? '240px' : '0' }}
+                animate={{ marginLeft: !isMobile && open ? '240px' : '0' }}
                 transition={{ type: 'tween', duration: 0.3 }}
             >
                 <Box 
                     className="main-content" 
                     sx={{ 
-                        width: open ? 'calc(100% - 48px)' : 'unset',
+                        width: !isMobile && open ? 'calc(100% - 48px)' : 'unset',
                         transition: 'left 0.3s ease',
                         height: '100vh',
                         display: 'flex',

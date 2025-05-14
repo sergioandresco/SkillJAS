@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
     AppBar,
     Toolbar,
@@ -9,6 +10,7 @@ import {
     useTheme,
     Slide,
 } from "@mui/material";
+import { useUser } from '@clerk/clerk-react';
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { motion, AnimatePresence } from "framer-motion";
 import GradientText from "../gradientText";
@@ -26,6 +28,9 @@ function Header() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const [index, setIndex] = useState(0);
+
+    const { user } = useUser();
+    const role = user?.publicMetadata?.role || "user";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -91,6 +96,22 @@ function Header() {
 
                     
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                        {user && (role === "admin" || role === "user") && (
+                            <Typography
+                                component={Link}
+                                to="/dashboard"
+                                sx={{
+                                    color: "white",
+                                    textDecoration: "none",
+                                    fontWeight: 500,
+                                    "&:hover": {
+                                        color: "#a78bfa",
+                                    },
+                                }}
+                            >
+                                Dashboard
+                            </Typography>
+                        )}
                         <SignedIn>
                             <UserButton appearance={{
                                 elements: {
