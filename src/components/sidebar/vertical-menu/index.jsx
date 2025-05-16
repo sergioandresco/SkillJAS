@@ -81,7 +81,7 @@ function VerticalMenu({ open }){
                         className='opt-vertical-menu' 
                         button
                         component={Link} 
-                        to="/dashboard/courses"
+                        to="/dashboard/favorites"
                     >
                         <ListItemIcon sx={{ minWidth: 40 }}>
                             <MdFavorite color='#F0F0F0' style={{ fontSize: 22 }} />
