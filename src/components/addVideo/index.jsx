@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Box, TextField, Button, Typography, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 import { useAddVideo } from '../../hooks/useAddVideo';
 
 function AddVideo() {
@@ -34,7 +35,21 @@ function AddVideo() {
             courseUrl: form.url,
             category: categories,
         };
-        mutate(payload);
+        mutate(payload, {
+            onSuccess: () => {
+                toast.success("Video agregado correctamente");
+                setForm({
+                    title: '',
+                    description: '',
+                    url: '',
+                    category: '',
+                });
+                setCategories([]);
+            },
+            onError: () => {
+                toast.error("Error al agregar el video, intenta nuevamente");
+            }
+        });
     };
 
     return (
@@ -182,7 +197,20 @@ function AddVideo() {
 
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                     {categories.map((cat, idx) => (
-                        <Chip key={idx} label={cat} />
+                        <Chip 
+                            key={idx} 
+                            label={cat} 
+                            onDelete={() => {
+                                setCategories(categories.filter((c) => c !== cat));
+                            }}
+                            sx={{ 
+                                color: 'white', 
+                                background: '#7c3aed',
+                                '& .MuiChip-deleteIcon': {
+                                    color: 'white',
+                                }
+                            }} 
+                        />
                     ))}
                 </Box>
 
@@ -198,6 +226,11 @@ function AddVideo() {
                             backgroundColor: "#a78bfa",
                             color: "#ffffff",
                         },
+                        "&.Mui-disabled": {
+                            backgroundColor: "#a78bfa",
+                            color: "#ffffff",
+                            opacity: 0.7,
+                        },
                         borderRadius: "999px",
                         textTransform: "none",
                         px: 3,
@@ -206,9 +239,6 @@ function AddVideo() {
                 >
                     {isPending ? 'Guardando...' : 'Agregar Video'}
                 </Button>
-
-                {isSuccess && <Typography color="green">Video added successfully!</Typography>}
-                {isError && <Typography color="red">Error: {error.message}</Typography>}
             </Box>
         </motion.div>
     );

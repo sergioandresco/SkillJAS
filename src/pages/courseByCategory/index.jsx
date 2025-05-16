@@ -106,15 +106,21 @@ function CourseByCategory() {
                                     alt={video.title}
                                     sx={{ objectFit: "cover" }}
                                 />
-                                <CardContent sx={{ flexGrow: 1 }}>
-                                    <Typography variant="h6" gutterBottom sx={{ color: 'white' }}>
+                                <CardContent 
+                                    sx={{ 
+                                        display: 'flex', 
+                                        flexDirection: 'column', 
+                                        flexGrow: 1,
+                                        color: 'white' 
+                                    }}
+                                >
+                                    <Typography variant="h6" gutterBottom sx={{ color: 'white', minHeight: '66px' }}>
                                         {video.title}
                                     </Typography>
-                                    <Box sx={{ height: {xs: 'auto', md:'4.5em'} }}>
-                                        <Typography variant="body2" mb={2} sx={{ color: 'white' }}>
-                                            {video.description}
-                                        </Typography>
-                                    </Box>
+                                    <Typography variant="body2" mb={2} sx={{ color: 'white', textAlign: 'justify' }}>
+                                        {video.description}
+                                    </Typography>
+                                    
                                     {video.categories?.length > 0 && (
                                         <Stack direction="row" spacing={1} mb={2} flexWrap="wrap">
                                             {video.categories.map((cat, i) => (
@@ -122,23 +128,23 @@ function CourseByCategory() {
                                             ))}
                                         </Stack>
                                     )}
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        fullWidth
-                                        onClick={() => navigate(`/dashboard/course/video/${video.id}`)}
-                                        sx={{
-                                            background: '#7c3aed',
-                                            "&:hover": {
-                                                backgroundColor: "#a78bfa",
-                                                color: "#ffffff",
-                                            },
-                                        }}
-                                    >
-                                        Ver video
-                                    </Button>
+                                    <Box mt="auto">
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            fullWidth
+                                            onClick={() => navigate(`/dashboard/course/video/${video.id}`)}
+                                            sx={{
+                                                background: '#7c3aed',
+                                                "&:hover": {
+                                                    backgroundColor: "#a78bfa",
+                                                    color: "#ffffff",
+                                                },
+                                            }}
+                                        >
+                                            Ver video
+                                        </Button>
+                                    </Box>
                                 </CardContent>
                             </Card>
                         </Grid>

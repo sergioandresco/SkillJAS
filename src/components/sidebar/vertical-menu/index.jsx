@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, useMediaQuery, useTheme } from '@mui/material';
 import { IoHome } from "react-icons/io5";
-import { MdAddToQueue, MdOutlineVideoSettings } from "react-icons/md";
+import { MdAddToQueue, MdOutlineVideoSettings, MdFavorite } from "react-icons/md";
 import GradientText from '../../gradientText';
 import { useMenu } from '../../../context/MenuContext';
 
@@ -75,6 +75,18 @@ function VerticalMenu({ open }){
                             <IoHome color='#F0F0F0' style={{ fontSize: 22 }} />
                         </ListItemIcon>
                         <ListItemText sx={{ color: '#F0F0F0', fontSize: '17px' }} primary="Categorías" />
+                    </ListItem>
+
+                    <ListItem
+                        className='opt-vertical-menu' 
+                        button
+                        component={Link} 
+                        to="/dashboard/courses"
+                    >
+                        <ListItemIcon sx={{ minWidth: 40 }}>
+                            <MdFavorite color='#F0F0F0' style={{ fontSize: 22 }} />
+                        </ListItemIcon>
+                        <ListItemText sx={{ color: '#F0F0F0', fontSize: '17px' }} primary="Favoritos" />
                     </ListItem>
 
                     {role === "admin" && (

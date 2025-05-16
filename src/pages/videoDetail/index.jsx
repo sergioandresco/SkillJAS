@@ -2,6 +2,9 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '@clerk/clerk-react';
 import { useEffect, useState } from 'react';
 import { useVideoDetail } from '../../hooks/useVideoDetail';
+import { useAddFavorite } from '../../hooks/useAddFavorite';
+import { useDeleteFavorite } from '../../hooks/useDeleteFavorite';
+import { toast } from 'sonner';
 import {
     Box,
     Typography,
@@ -11,16 +14,20 @@ import {
     Button,
     Container
 } from '@mui/material';
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
 
 const getYouTubeId = (url) => {
-  const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/);
-  return match ? match[1] : null;
+    const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/);
+    return match ? match[1] : null;
 };
 
 function VideoDetail() {
     const { id } = useParams();
     const { getToken } = useAuth();
     const [token, setToken] = useState(null);
+    const [isFavorite, setIsFavorite] = useState(false);
+    const { mutate: removeFromFavorite, isPending: isRemoving } = useDeleteFavorite(token);
+    const { mutate: addToFavorite, isPending, isSuccess, isError } = useAddFavorite(token);
 
     useEffect(() => {
         getToken().then(setToken);
@@ -32,6 +39,33 @@ function VideoDetail() {
     if (error) return <Typography>Error loading video</Typography>;
 
     const videoId = getYouTubeId(video.courseUrl);
+
+    const handleToggleFavorite = () => {
+        if (isFavorite) {
+            removeFromFavorite(
+                { courseId: video.id },
+                {
+                    onSuccess: () => {
+                        toast.success('Video retirado de favoritos');
+                        setIsFavorite(false);
+                    },
+                    onError: () => {
+                        toast.error('Error al retirar de favoritos');
+                    },
+                }
+            );
+        } else {
+            addToFavorite(video.id, {
+                onSuccess: () => {
+                    toast.success('Video agregado a favoritos');
+                    setIsFavorite(true);
+                },
+                onError: () => {
+                    toast.error('Error al agregar a favoritos');
+                },
+            });
+        }
+    };
 
     return (
         <Container maxWidth="md" sx={{ py: 4, marginBottom: '32px' }}>
@@ -94,15 +128,22 @@ function VideoDetail() {
                 </Button>
                 <Button 
                     variant="contained"
+                    onClick={handleToggleFavorite}
+                    disabled={isPending || isRemoving}
                     sx={{ 
-                        background: '#7c3aed',
+                        background: isFavorite ? '#ef4444' : '#7c3aed',
                         "&:hover": {
-                            backgroundColor: "#a78bfa",
+                            backgroundColor: isFavorite ? "#f87171" : "#a78bfa",
                             color: "#ffffff",
                         },
                     }}
+                    startIcon={isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
                 >
-                    Agregar a favoritos
+                    {isPending || isRemoving
+                        ? 'Actualizando...'
+                        : isFavorite
+                            ? 'Quitar de favoritos'
+                            : 'Agregar a favoritos'}
                 </Button>
             </Stack>
         </Container>
