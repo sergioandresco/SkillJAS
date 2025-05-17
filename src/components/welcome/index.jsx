@@ -31,8 +31,8 @@ function Welcome() {
             initial="hidden"
             animate="visible"
         >
-            <Box sx={{ padding: 4, textAlign: "center" }}>
-                <Typography variant="h1" gutterBottom sx={{ fontWeight: "bold", color: 'white' }}>
+            <Box sx={{ padding: {xs: 0, md: 4}, textAlign: "center" }}>
+                <Typography variant="h1" gutterBottom sx={{ fontWeight: "bold", color: 'white', fontSize: {xs: '40px', md: '80px'} }}>
                     ¡Hola, {user?.firstName || "usuario"}!{" "}
                     <motion.span variants={handVariants} initial="initial" animate="animate">
                         👋

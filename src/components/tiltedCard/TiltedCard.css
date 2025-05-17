@@ -83,3 +83,10 @@
     box-shadow: 0 5px 30px #06060659;
     font-size: 14px;
 } 
+
+@media (min-width: 0px) and (max-width: 944px){
+    .tilted-card-figure{
+        margin: 0;
+    }
+
+}

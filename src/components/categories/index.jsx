@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,9 @@ function Categories() {
     const [token, setToken] = useState(null);
     const navigate = useNavigate();
 
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     useEffect(() => {
         getToken().then(setToken);
     }, [getToken]);
@@ -51,7 +54,7 @@ function Categories() {
         <Box
             sx={{
                 width: "100%",
-                px: 2,
+                px: {xs: 0, md: 2},
                 color: "#fff",
                 textAlign: "center",
                 marginBottom: "45px",
@@ -79,10 +82,10 @@ function Categories() {
                                         imageSrc={categorie.logo}
                                         altText={categorie.name}
                                         captionText={categorie.name}
-                                        containerHeight="150px"
-                                        containerWidth="150px"
-                                        imageHeight="150px"
-                                        imageWidth="150px"
+                                        containerHeight={isMobile ? "100px" : "150px"}
+                                        containerWidth={isMobile ? "100px" : "150px"}
+                                        imageHeight={isMobile ? "100px" : "150px"}
+                                        imageWidth={isMobile ? "100px" : "150px"}
                                         rotateAmplitude={12}
                                         scaleOnHover={1.2}
                                         showMobileWarning={false}
