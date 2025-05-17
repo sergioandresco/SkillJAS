@@ -1,0 +1,17 @@
+.opt-vertical-menu{
+    text-decoration: none;
+    color: #fff;
+}
+
+.opt-vertical-menu:hover{
+    background-color: #383856 !important;
+    color: #000;
+}
+
+.opt-vertical-menu .MuiListItemIcon-root {
+    color: white;
+}
+
+.opt-vertical-menu:hover .MuiListItemIcon-root {
+    color: black;
+}
