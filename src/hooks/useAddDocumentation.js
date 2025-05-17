@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuth } from "@clerk/clerk-react";
 
-const API_URL = import.meta.env.VITE_ADD_VIDEO;
+const API_URL = import.meta.env.VITE_ADD_DOCUMENTATION;
 
-export const useAddVideo = () => {
+export const useAddDocumentation = () => {
     const { getToken } = useAuth();
 
     return useMutation({

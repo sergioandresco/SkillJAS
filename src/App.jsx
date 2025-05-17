@@ -13,6 +13,8 @@ import CourseByCategory from "./pages/courseByCategory";
 import VideoDetail from "./pages/videoDetail";
 import AdminVideos from "./components/adminVideos";
 import FavoriteVideos from "./pages/favorites";
+import AddDocumentation from "./components/addDocumentation";
+import Documentations from "./pages/documentations";
 
 const router = createBrowserRouter([
 	{
@@ -74,7 +76,15 @@ const router = createBrowserRouter([
 		{
 			path: "favorites",
 			element: <FavoriteVideos />
-		}
+		},
+		{
+			path: "add-documentation",
+			element: <AddDocumentation />
+		},
+		{
+			path: "documentations",
+			element: <Documentations />
+		},
 	  ]
 	},
 	{
