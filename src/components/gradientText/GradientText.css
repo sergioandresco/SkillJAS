@@ -1,3 +1,7 @@
+.title-dashboard{
+	font-size: 38px !important;
+}
+
 .animated-gradient-text {
     position: relative;
     display: flex;
@@ -14,9 +18,9 @@
     font-family: 'Quicksand', sans-serif;
     letter-spacing: 1.5;
     font-size: 50px;
-  }
+}
   
-  .gradient-overlay {
+.gradient-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -27,9 +31,9 @@
     border-radius: inherit;
     z-index: 0;
     pointer-events: none;
-  }
+}
   
-  .gradient-overlay::before {
+.gradient-overlay::before {
     content: "";
     position: absolute;
     left: 0;
@@ -42,9 +46,9 @@
     transform: translate(-50%, -50%);
     background-color: #060606;
     z-index: -1;
-  }
+}
   
-  @keyframes gradient {
+@keyframes gradient {
     0% {
       background-position: 0% 50%;
     }
@@ -56,7 +60,7 @@
     100% {
       background-position: 0% 50%;
     }
-  }
+}
   
 .text-content {
     display: inline-block;
