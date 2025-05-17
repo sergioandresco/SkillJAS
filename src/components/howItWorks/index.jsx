@@ -2,8 +2,9 @@ import { Box, Typography, Grid, Stack, useMediaQuery } from "@mui/material";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlinePersonAddAlt, MdMenuBook, MdOutlinePlayCircleFilled } from "react-icons/md";
-import testImage from "../../assets/imgs/test1.webp";
 import ImageFirstStep from "../../assets/imgs/firstStep.webp";
+import ImageSecondStep from "../../assets/imgs/secondStep.webp";
+import ImageThirdStep from "../../assets/imgs/thirdStep.webp";
 
 const steps = [
     {
@@ -16,13 +17,13 @@ const steps = [
       icon: <MdMenuBook size={32} />,
       title: "Paso 2: Elige tus temas",
       description: "Selecciona los temas que quieres aprender.",
-      image: testImage,
+      image: ImageSecondStep,
     },
     {
       icon: <MdOutlinePlayCircleFilled size={32} />,
       title: "Paso 3: Mira cursos rápidos",
       description: "Accede a contenido directo y sin relleno.",
-      image: testImage,
+      image: ImageThirdStep,
     },
 ];
 
