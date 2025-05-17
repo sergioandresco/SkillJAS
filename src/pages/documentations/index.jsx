@@ -5,12 +5,12 @@ import { useDocumentations } from "../../hooks/useDocumentations";
 import {
     Box,
     Typography,
-    CircularProgress,
     Grid,
     Card,
     CardContent,
     Button,
 } from "@mui/material";
+import Loader from "../../components/loader";
 
 function Documentations() {
     const { state } = useLocation();
@@ -24,7 +24,7 @@ function Documentations() {
 
     const { data, isLoading, error } = useDocumentations(token);
 
-    if (isLoading || !token) return <CircularProgress />;
+    if (isLoading || !token) return <Loader />;
     if (error) return <Typography>Error loading documentatios</Typography>;
 
     return (

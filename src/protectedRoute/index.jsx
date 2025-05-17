@@ -5,7 +5,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 	const { user, isLoaded } = useUser();
 	const role = user?.publicMetadata?.role || "user";
 
-	if (!isLoaded) return null; // o un spinner si prefieres
+	if (!isLoaded) return null;
 
 	if (allowedRoles && !allowedRoles.includes(role)) {
 		return <Navigate to="/unauthorized" />;
