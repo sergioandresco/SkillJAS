@@ -1,8 +1,10 @@
-import { Box, Grid } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Box, Grid, CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
-import TiltedCard from "../tiltedCard";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { useCategories } from "../../hooks/useCategories";
+import TiltedCard from "../tiltedCard";
 
 const categories = [
     { name: "React", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg", url: "/dashboard/course/react" },
@@ -21,20 +23,28 @@ const categories = [
 function Categories() {
 
     const { getToken } = useAuth();
+    const [token, setToken] = useState(null);
     const navigate = useNavigate();
 
-    const handleCategoryClick = async (categorie) => {
-        const token = await getToken();
-        if (!token) return;
-      
+    useEffect(() => {
+        getToken().then(setToken);
+    }, [getToken]);
+
+    const { data: apiCategories, isLoading } = useCategories(token);
+
+    const handleCategoryClick = (categorie) => {
         navigate(`/dashboard/course/category/${categorie.name.toLowerCase()}`, {
-          state: {                         
-            token,
-            logo: categorie.logo,
-            title: categorie.name
-          }
+            state: {
+                token,
+                logo: categorie.logo,
+                title: categorie.name
+            }
         });
     };
+
+    const validCategoryNames = apiCategories ? new Set(Object.keys(apiCategories)) : new Set();
+
+    const filteredCategories = categories.filter(cat => validCategoryNames.has(cat.name));
 
     return ( 
         <Box
@@ -46,45 +56,49 @@ function Categories() {
                 marginBottom: "45px",
             }}
         >
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                viewport={{ once: true }}
-            >
-                <Grid container spacing={3} justifyContent="center">
-                    {categories.map((categorie, i) => (
-                        <Grid item xs={4} sm={3} md={2} key={categorie.name}>
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                                onClick={() => handleCategoryClick(categorie)}
-                                style={{ cursor: "pointer" }}
-                            >
-                                <TiltedCard
-                                    imageSrc={categorie.logo}
-                                    altText={categorie.name}
-                                    captionText={categorie.name}
-                                    containerHeight="150px"
-                                    containerWidth="150px"
-                                    imageHeight="150px"
-                                    imageWidth="150px"
-                                    rotateAmplitude={12}
-                                    scaleOnHover={1.2}
-                                    showMobileWarning={false}
-                                    showTooltip={true}
-                                    displayOverlayContent={true}
-                                    overlayContent={
-                                        <p className="tilted-card-demo-text">
-                                            {categorie.name}
-                                        </p>
-                                    }
-                                />
-                            </motion.div>
-                        </Grid>
-                    ))}
-                </Grid>
-            </motion.div>
+            {isLoading ? (
+                <CircularProgress sx={{ color: "white", mt: 4 }} />
+            ) : (
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.7 }}
+                    viewport={{ once: true }}
+                >
+                    <Grid container spacing={3} justifyContent="center">
+                        {filteredCategories.map((categorie) => (
+                            <Grid item xs={4} sm={3} md={2} key={categorie.name}>
+                                <motion.div
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                    onClick={() => handleCategoryClick(categorie)}
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    <TiltedCard
+                                        imageSrc={categorie.logo}
+                                        altText={categorie.name}
+                                        captionText={categorie.name}
+                                        containerHeight="150px"
+                                        containerWidth="150px"
+                                        imageHeight="150px"
+                                        imageWidth="150px"
+                                        rotateAmplitude={12}
+                                        scaleOnHover={1.2}
+                                        showMobileWarning={false}
+                                        showTooltip={true}
+                                        displayOverlayContent={true}
+                                        overlayContent={
+                                            <p className="tilted-card-demo-text">
+                                                {categorie.name}
+                                            </p>
+                                        }
+                                    />
+                                </motion.div>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </motion.div>
+            )}
         </Box>
     );
 }
