@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Box, Grid, CircularProgress } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { useCategories } from "../../hooks/useCategories";
 import TiltedCard from "../tiltedCard";
+import Loader from "../loader";
 
 const categories = [
     { name: "React", logo: "https://microsistem.s3.us-east-2.amazonaws.com/react.svg", url: "/dashboard/course/react" },
@@ -57,7 +58,7 @@ function Categories() {
             }}
         >
             {isLoading ? (
-                <CircularProgress sx={{ color: "white", mt: 4 }} />
+                <Loader />
             ) : (
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}

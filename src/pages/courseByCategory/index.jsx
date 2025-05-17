@@ -5,7 +5,6 @@ import { useCategoryVideos } from "../../hooks/useCategoryVideos";
 import {
     Box,
     Typography,
-    CircularProgress,
     Grid,
     Card,
     CardContent,
@@ -15,6 +14,7 @@ import {
     Stack,
 } from "@mui/material";
 import Pagination from '@mui/material/Pagination';
+import Loader from "../../components/loader";
 
 const getYouTubeId = (url) => {
     const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/);
@@ -37,7 +37,7 @@ function CourseByCategory() {
 
     const { data, isLoading, error } = useCategoryVideos(category, token, page);
 
-    if (isLoading || !token) return <CircularProgress />;
+    if (isLoading || !token) return <Loader />;
     if (error) return <Typography>Error loading videos</Typography>;
 
     const handlePageChange = (event, value) => {

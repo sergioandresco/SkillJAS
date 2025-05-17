@@ -8,13 +8,13 @@ import { toast } from 'sonner';
 import {
     Box,
     Typography,
-    CircularProgress,
     Chip,
     Stack,
     Button,
     Container
 } from '@mui/material';
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import Loader from '../../components/loader';
 
 const getYouTubeId = (url) => {
     const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/);
@@ -35,7 +35,7 @@ function VideoDetail() {
 
     const { data: video, isLoading, error } = useVideoDetail(id, token);
 
-    if (isLoading || !token) return <CircularProgress />;
+    if (isLoading || !token) return <Loader />;
     if (error) return <Typography>Error loading video</Typography>;
 
     const videoId = getYouTubeId(video.courseUrl);

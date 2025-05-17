@@ -18,22 +18,6 @@ const styles = {
   },
 }
 
-/**
- * DecryptedText
- *
- * Props:
- * - text: string
- * - speed?: number
- * - maxIterations?: number
- * - sequential?: boolean
- * - revealDirection?: "start" | "end" | "center"
- * - useOriginalCharsOnly?: boolean
- * - characters?: string
- * - className?: string          (applied to revealed/normal letters)
- * - parentClassName?: string    (applied to parent span)
- * - encryptedClassName?: string (applied to encrypted letters)
- * - animateOn?: "view" | "hover"  (default: "hover")
- */
 export default function DecryptedText({
   text,
   speed = 60,

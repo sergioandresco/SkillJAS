@@ -15,11 +15,11 @@ import {
     TableRow,
     Paper,
     Button,
-    CircularProgress,
 } from "@mui/material";
 import { useState } from "react";
 import { motion } from 'framer-motion';
 import { useAdminVideos } from "../../hooks/useAdminVideos";
+import Loader from "../loader";
   
 function AdminVideos() {
     const { videos, isLoading, enableVideo, disableVideo } = useAdminVideos();
@@ -28,7 +28,7 @@ function AdminVideos() {
     if (isLoading) {
       return (
         <Box display="flex" justifyContent="center" mt={4}>
-          <CircularProgress />
+          <Loader />
         </Box>
       );
     }

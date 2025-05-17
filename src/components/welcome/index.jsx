@@ -17,7 +17,6 @@ function Welcome() {
         },
     };
 
-    // Variantes para el emoji de saludo (efecto de "wave")
     const handVariants = {
         initial: { rotate: 0 },
         animate: {

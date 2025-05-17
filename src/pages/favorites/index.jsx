@@ -5,7 +5,6 @@ import { useFavoriteVideos } from "../../hooks/useFavoriteVideos";
 import {
     Box,
     Typography,
-    CircularProgress,
     Grid,
     Card,
     CardContent,
@@ -14,6 +13,7 @@ import {
     Chip,
     Stack,
 } from "@mui/material";
+import Loader from "../../components/loader";
 
 const getYouTubeId = (url) => {
     const match = url.match(/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/);
@@ -35,7 +35,7 @@ function FavoriteVideos() {
 
     const { data, isLoading, error } = useFavoriteVideos(token);
 
-    if (isLoading || !token) return <CircularProgress />;
+    if (isLoading || !token) return <Loader />;
     if (error) return <Typography>Error loading videos</Typography>;
 
     const handlePageChange = (event, value) => {
