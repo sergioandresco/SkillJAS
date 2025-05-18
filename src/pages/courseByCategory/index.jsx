@@ -79,7 +79,7 @@ function CourseByCategory() {
                     Videos de {title || category}
                 </Typography>
             </Box>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} sx={{ justifyContent: 'center' }}>
                 {data.items
                     .filter((video) => video.isActive)
                     .map((video) => {
