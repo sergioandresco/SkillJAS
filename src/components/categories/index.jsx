@@ -26,6 +26,7 @@ const categories = [
     { name: "CSS", logo: "https://microsistem.s3.us-east-2.amazonaws.com/css.svg", url: "/dashboard/course/css" },
     { name: "Excel", logo: "https://microsistem.s3.us-east-2.amazonaws.com/excel.svg", url: "/dashboard/course/excel" },
     { name: "Git", logo: "https://microsistem.s3.us-east-2.amazonaws.com/git.svg", url: "/dashboard/course/git" },
+    { name: "Clerk", logo: "https://microsistem.s3.us-east-2.amazonaws.com/clerk.svg", url: "/dashboard/course/clerk" },
 ];
 
 function Categories() {
