@@ -62,7 +62,7 @@ function Documentations() {
                     Documentaciones oficiales
                 </Typography>
             </Box>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} sx={{ justifyContent: 'center' }}>
                 {data
                     .filter((documentation) => documentation.isActive)
                     .map((documentation) => {
