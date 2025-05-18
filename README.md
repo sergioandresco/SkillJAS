@@ -23,6 +23,21 @@
 
 ---
 
+## 🔐 ¿Cómo usamos Clerk?
+
+Clerk fue fundamental para la implementación de autenticación y gestión de usuarios en **SkillJAS**.  
+Utilizamos sus servicios para:
+
+- Registro e inicio de sesión de usuarios con correo electrónico y contraseña.
+- Inicio de sesión mediante **proveedores sociales** como **Google**, **GitHub** y **Facebook**.
+- Autenticación protegida mediante JWT en las llamadas al backend.
+- Gestión de roles básicos (usuario/admin) para acceso a funciones como subir videos o administrar la plataforma.
+- Persistencia automática de la sesión y protección de rutas privadas con `ClerkProvider` y componentes como `SignedIn`, `SignedOut`.
+
+Gracias a Clerk, logramos una experiencia de autenticación segura, moderna y fácil de integrar, lo que nos permitió enfocarnos en la lógica y experiencia del producto sin preocuparnos por la infraestructura de autenticación.
+
+---
+
 ## 🎯 Aprende rápido, sin perderte entre miles de opciones
 
 **SkillJAS** es una plataforma web educativa **100% gratuita**, donde los usuarios pueden aprender tecnologías clave a través de contenido previamente curado.  
