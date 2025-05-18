@@ -18,7 +18,14 @@ const categories = [
     { name: "Docker", logo: "https://microsistem.s3.us-east-2.amazonaws.com/docker.svg", url: "/dashboard/course/docker" },
     { name: "AWS", logo: "https://microsistem.s3.us-east-2.amazonaws.com/aws.svg", url: "/dashboard/course/aws" },
     { name: "MongoDB", logo: "https://microsistem.s3.us-east-2.amazonaws.com/mongodb.svg", url: "/dashboard/course/mongodb" },
-    { name: "MySQL", logo: "https://microsistem.s3.us-east-2.amazonaws.com/mysql.svg", url: "/dashboard/course/mysql" },
+    { name: "Mysql", logo: "https://microsistem.s3.us-east-2.amazonaws.com/mysql.svg", url: "/dashboard/course/mysql" },
+    { name: "SQL", logo: "https://microsistem.s3.us-east-2.amazonaws.com/microsoft-sql-server.svg", url: "/dashboard/course/sql" },
+    { name: "Visual studio", logo: "https://microsistem.s3.us-east-2.amazonaws.com/visual-studio.svg", url: "/dashboard/course/visual-studio" },
+    { name: "CSHARP", logo: "https://microsistem.s3.us-east-2.amazonaws.com/c.svg", url: "/dashboard/course/c" },
+    { name: "HTML", logo: "https://microsistem.s3.us-east-2.amazonaws.com/html.svg", url: "/dashboard/course/html" },
+    { name: "CSS", logo: "https://microsistem.s3.us-east-2.amazonaws.com/css.svg", url: "/dashboard/course/css" },
+    { name: "Excel", logo: "https://microsistem.s3.us-east-2.amazonaws.com/excel.svg", url: "/dashboard/course/excel" },
+    { name: "Git", logo: "https://microsistem.s3.us-east-2.amazonaws.com/git.svg", url: "/dashboard/course/git" },
 ];
 
 function Categories() {
