@@ -5,14 +5,14 @@
 > **Plataforma educativa gratuita**, enfocada en el aprendizaje efectivo y curado.  
 > 🏆 _Proyecto desarrollado para la Hackathon de Clerk organizada por Midudev._
 
-[![Vercel](https://vercelbadge.vercel.app/api/sergioandresco/SkillJAS)](https://ezreadme-gamma.vercel.app/)
+[![Vercel](https://vercelbadge.vercel.app/api/sergioandresco/SkillJAS)](https://skilljas.vercel.app/)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ---
 
 ## 🌐 Sitio Web
 
-👉 [https://ezreadme-gamma.vercel.app/](https://ezreadme-gamma.vercel.app/)
+👉 [https://skilljas.vercel.app/](https://skilljas.vercel.app/)
 
 ---
 
