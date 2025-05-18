@@ -2,10 +2,21 @@ import { Box, Button, Typography } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import Typewriter from "typewriter-effect";
+import { useUser, SignInButton } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 function HeroSection() {
 
     const [index, setIndex] = useState(0);
+    const { isSignedIn } = useUser();
+    const navigate = useNavigate();
+
+    const handleClick = (e) => {
+        if (isSignedIn) {
+            navigate("/dashboard/courses");
+        }
+    };
+
 
     return (
         <motion.div
@@ -59,7 +70,6 @@ function HeroSection() {
                                 typewriter
                                   .typeString("Aprende rápido, sin perderte entre miles de opciones.")
                                   .callFunction((state) => {
-                                    // Ocultar el cursor después de que termine la escritura
                                     state.elements.cursor.style.display = "none";
                                   })
                                   .start();
@@ -86,21 +96,43 @@ function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
                 >
-                    <Button
-                        variant="contained"
-                        sx={{
-                            mt: 4,
-                            px: 4,
-                            py: 1.5,
-                            borderRadius: "30px",
-                            backgroundColor: "#7c3aed",
-                            "&:hover": {
-                            backgroundColor: "#a78bfa",
-                            },
-                        }}
-                    >
-                        Explorar Cursos
-                    </Button>
+                    {isSignedIn ? (
+                        <Button
+                            variant="contained"
+                            onClick={handleClick}
+                            sx={{
+                                mt: 4,
+                                px: 4,
+                                py: 1.5,
+                                borderRadius: "30px",
+                                backgroundColor: "#7c3aed",
+                                "&:hover": {
+                                    backgroundColor: "#a78bfa",
+                                },
+                            }}
+                        >
+                            Explorar Cursos
+                        </Button>
+                    ) : (
+                        <SignInButton mode="modal">
+                            <Button
+                                variant="contained"
+                                onClick={handleClick}
+                                sx={{
+                                    mt: 4,
+                                    px: 4,
+                                    py: 1.5,
+                                    borderRadius: "30px",
+                                    backgroundColor: "#7c3aed",
+                                    "&:hover": {
+                                        backgroundColor: "#a78bfa",
+                                    },
+                                }}
+                            >
+                                Explorar Cursos
+                            </Button>
+                        </SignInButton>
+                    )}
                 </motion.div>
             </Box>
         </motion.div>
