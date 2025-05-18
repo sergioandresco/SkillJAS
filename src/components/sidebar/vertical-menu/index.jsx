@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 import { IoHome } from "react-icons/io5";
 import { useAuth } from "@clerk/clerk-react";
-import { MdAddToQueue, MdOutlineVideoSettings, MdFavorite, MdExpandMore } from "react-icons/md";
+import { MdAddToQueue, MdOutlineVideoSettings, MdFavorite, MdExpandMore, MdEditDocument } from "react-icons/md";
 import { HiDocumentMagnifyingGlass, HiDocumentPlus } from "react-icons/hi2";
 import GradientText from '../../gradientText';
 import { useMenu } from '../../../context/MenuContext';
@@ -238,6 +238,17 @@ function VerticalMenu({ open }){
                                     <HiDocumentPlus color='#F0F0F0' style={{ fontSize: 22 }} />
                                 </ListItemIcon>
                                 <ListItemText sx={{ color: '#F0F0F0', fontSize: '17px' }} primary="Agregar Documentación" />
+                            </ListItem>
+                            <ListItem
+                                className='opt-vertical-menu' 
+                                button
+                                component={Link} 
+                                to="/dashboard/admin-documentations"
+                            >
+                                <ListItemIcon sx={{ minWidth: 40 }}>
+                                    <MdEditDocument color='#F0F0F0' style={{ fontSize: 22 }} />
+                                </ListItemIcon>
+                                <ListItemText sx={{ color: '#F0F0F0', fontSize: '17px' }} primary="Administrar Documentación" />
                             </ListItem>
                         </>
                     )}

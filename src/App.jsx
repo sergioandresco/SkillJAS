@@ -15,6 +15,7 @@ import AdminVideos from "./components/adminVideos";
 import FavoriteVideos from "./pages/favorites";
 import AddDocumentation from "./components/addDocumentation";
 import Documentations from "./pages/documentations";
+import AdminDocumentations from "./components/adminDocumentations";
 
 const router = createBrowserRouter([
 	{
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
 		{
 			path: "documentations",
 			element: <Documentations />
+		},
+		{
+			path: "admin-documentations",
+			element: <AdminDocumentations />
 		},
 	  ]
 	},
