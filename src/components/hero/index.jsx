@@ -88,7 +88,7 @@ function HeroSection() {
                         marginX: "auto",
                     }}
                 >
-                    SkillJAS es una plataforma educativa gratuita para desarrolladores, donde encontrarás solo el mejor contenido previamente seleccionado. Olvídate de perder tiempo buscando cursos: aquí solo verás lo que realmente te ayuda a aprender.
+                    SkillJAS es una plataforma educativa gratuita, donde encontrarás solo el mejor contenido previamente seleccionado. Olvídate de perder tiempo buscando cursos: aquí solo verás lo que realmente te ayuda a aprender.
                 </Typography>
 
                 <motion.div
