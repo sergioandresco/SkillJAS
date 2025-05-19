@@ -7,33 +7,36 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
-    Button,
+	Pagination,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from 'framer-motion';
+import { useAuth } from "@clerk/clerk-react";
 import { useAdminVideos } from "../../hooks/useAdminVideos";
+import { useCategories } from "../../hooks/useCategories";
+import VideoTable from "./videoTable";
 import Loader from "../loader";
   
 function AdminVideos() {
-    const { videos, isLoading, enableVideo, disableVideo } = useAdminVideos();
     const [selectedCategory, setSelectedCategory] = useState("All");
+    const { getToken } = useAuth();
+    const [token, setToken] = useState(null);
+	const [page, setPage] = useState(1);
+	const { videos, isLoading, isFetching, enableVideo, disableVideo, totalPages } = useAdminVideos(page);
+
+	useEffect(() => {
+        getToken().then(setToken);
+    }, [getToken]);
+
+	const { data: categoriesMap, isLoading: isCategoriesLoading } = useCategories(token || undefined);
   
-    if (isLoading) {
-      return (
-        <Box display="flex" justifyContent="center" mt={4}>
-          <Loader />
-        </Box>
-      );
-    }
-  
-    const categories = [...new Set(videos.flatMap((v) => v.category))];
+    if (isCategoriesLoading) {
+		return (
+		  <Box display="flex" justifyContent="center" mt={4}>
+			<Loader />
+		  </Box>
+		);
+	  }
   
     const filteredVideos =
       selectedCategory === "All"
@@ -59,67 +62,35 @@ function AdminVideos() {
 			</Typography>
 	
 			<Card sx={{ mb: 3 }}>
-			<CardContent>
-				<FormControl fullWidth>
-				<InputLabel>Categoría</InputLabel>
-				<Select
-					value={selectedCategory}
-					label="Categoría"
-					onChange={(e) => setSelectedCategory(e.target.value)}
-				>
-					<MenuItem value="All">Todas</MenuItem>
-					{categories.map((cat) => (
-					<MenuItem key={cat} value={cat}>
-						{cat}
-					</MenuItem>
-					))}
-				</Select>
-				</FormControl>
-			</CardContent>
+				<CardContent>
+					<FormControl fullWidth>
+						<InputLabel>Categoría</InputLabel>
+						<Select
+							value={selectedCategory}
+							label="Categoría"
+							onChange={(e) => setSelectedCategory(e.target.value)}
+						>
+							<MenuItem value="All">Todas</MenuItem>
+							{categoriesMap && Object.entries(categoriesMap).map(([key]) => (
+								<MenuItem key={key} value={key}>
+									{key}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+				</CardContent>
 			</Card>
 	
-			<TableContainer component={Paper}>
-			<Table>
-				<TableHead>
-				<TableRow>
-					<TableCell><strong>Título</strong></TableCell>
-					<TableCell><strong>Categoría</strong></TableCell>
-					<TableCell><strong>Estado</strong></TableCell>
-					<TableCell align="right"><strong>Acciones</strong></TableCell>
-				</TableRow>
-				</TableHead>
-				<TableBody>
-				{filteredVideos.map((video) => (
-					<TableRow key={video.id}>
-					<TableCell>{video.title}</TableCell>
-					<TableCell>{video.category.join(", ")}</TableCell>
-					<TableCell>
-						{video.isActive ? "Habilitado" : "Deshabilitado"}
-					</TableCell>
-					<TableCell align="right">
-						{video.isActive ? (
-						<Button
-							variant="outlined"
-							color="error"
-							onClick={() => disableVideo(video.id)}
-						>
-							Deshabilitar
-						</Button>
-						) : (
-						<Button
-							variant="contained"
-							color="success"
-							onClick={() => enableVideo(video.id)}
-						>
-							Habilitar
-						</Button>
-						)}
-					</TableCell>
-					</TableRow>
-				))}
-				</TableBody>
-			</Table>
-			</TableContainer>
+			<VideoTable
+				videos={filteredVideos}
+				isFetching={isFetching}
+				enableVideo={enableVideo}
+				disableVideo={disableVideo}
+				page={page}
+				setPage={setPage}
+				totalPages={totalPages}
+			/>
+
 		</Box>
     );
 }
